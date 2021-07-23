@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A class to maintain an arbitrarily long list of notes.
@@ -161,26 +163,40 @@ public class NotebookFinished
         }
     }
     
-//    /**
-//     * Search in all notes using regular expressions.
-//     * You can use a single "?" to replace any single character.
-//     * Or use a single "*" to replace any number of characters.
-//     * It's case-INsensitive!
-//     * @param searchWord The term to be found.
-//     */
-//    public void search(String searchWord)
-//    {
-//        int termsFound = 0; //counts all findings
-//        for(String oneNote : notes) { //for-each-loop
-//            if (searchengine.run(oneNote, searchWord)){
-//                System.out.println("Found search word '" + 
-//                    searchWord + "' at position " +     //print this
-//                    notes.indexOf(oneNote) + ", note: " + oneNote);
-//                termsFound++; //increase count of found terms
-//            }
-//        }
-//        if (termsFound == 0) { //only if nothing is found, print message
-//            System.out.println("Search term " +searchWord + " not found.");
-//        }
-//    }
+    /**
+     * Search in all notes using regular expressions.
+     * @param searchWord The term to be found.
+     */
+    public void search(String searchWord)
+    {
+    	// Replace any of the characters from task 8
+    	if (searchWord.contains("?")) {
+    		searchWord = searchWord.replaceAll("\\?", "\\.");
+    	}
+    	
+    	if (searchWord.contains("*")) {
+    		searchWord = searchWord.replaceAll("\\*", "\\.*");
+    	}
+    	
+    	// Create a RegEx search pattern from the given word
+    	Pattern pattern = Pattern.compile("sch(.*)t", Pattern.CASE_INSENSITIVE);
+    	boolean matchFound = false;
+    	
+        for(String oneNote : notes) { //for-each-loop
+        	// Find matches of the pattern in the given text
+        	Matcher matcher = pattern.matcher(oneNote);
+        	matchFound = matcher.find();
+            
+            // If the term is found print this
+            if(matcher.find()) {
+            	System.out.println("Found search word '" +
+                    searchWord + "' at position " +
+                    notes.indexOf(oneNote) + ", note: " + oneNote);
+            }
+        }
+    	
+    	if (!matchFound) { //only if nothing is found, print message
+    		System.out.println("Search term " + searchWord + " not found.");
+        }
+    }
 }
