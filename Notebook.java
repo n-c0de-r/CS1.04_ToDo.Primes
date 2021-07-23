@@ -9,20 +9,19 @@ import java.util.ArrayList;
  * @version 2008.03.30
  * @updated 2020.12.07 by GitYusuf and n-c0de-r
  */
-public class Notebook
+public class NotebookFinished
 {
     // Storage for an arbitrary number of notes.
     private ArrayList<String> notes;
-    private Searchengine searchengine;
 
     /**
      * Perform any initialization that is required for the
-     * notebook.
+     * notebook. Fill the notebook with test strings at start.
      */
-    public Notebook()
+    public NotebookFinished()
     {
         notes = new ArrayList<String>();
-        searchengine = new Searchengine();
+        fillNotebook();
     }
 
     /**
@@ -31,10 +30,10 @@ public class Notebook
     public void fillNotebook(){
         storeNote("Erste Notiz");
         storeNote("Zweite Aufzeichnung");
-        storeNote("Dr1tter Eintrag");
+        storeNote("n-c0de-rs Dr1tter Eintrag");
         storeNote("Mitschrift Nummer 4");
         storeNote("Vermerk Nr fünf");
-        storeNote("Sixth Note");
+        storeNote("Found Sixth Note on Github");
         storeNote("Seventh's a Heaven");    
     }
     
@@ -52,8 +51,8 @@ public class Notebook
      * @param noteNumber index of note.
      */
     public void removeNote(int noteNumber)
-    {
-        if(numberOfNotes() < noteNumber || noteNumber < 0) { //if noteNumber is not within limits
+    {   // If noteNumber is not within limits
+        if(numberOfNotes() < noteNumber || noteNumber < 0) {
             System.out.println("Error: Note number is not valid.");
         }
         else {
@@ -75,51 +74,60 @@ public class Notebook
      */
     public void showNote(int noteNumber)
     {
-        if(noteNumber < 0) {
-            // This is not a valid note number, so do nothing.
-        }
-        else if(noteNumber < numberOfNotes()) {
+        if(noteNumber > 0 && noteNumber < numberOfNotes()) {
             // This is a valid note number, so we can print it.
             System.out.println(notes.get(noteNumber));
-        }
-        else {
-            // This is not a valid note number, so do nothing.
         }
     }
 
     /**
      * Show all notes.
      */
-    public void listAllNote()
+    public void listAllNotes()
     {
         for(String oneNote : notes) { //for-each-loop
-            System.out.println(notes.indexOf(oneNote) + ": " + oneNote);
+            String noteNr = "";
+            int nr = notes.indexOf(oneNote);
+            
+            if (nr <= 9) {
+                noteNr = "0" + nr;
+            } else {
+                noteNr = "" + nr;
+            }
+            
+            System.out.println(noteNr + ": " + oneNote);
         }
     }
-
-    /**
-     * Search in all notes using regular expressions.
-     * You can use a single "?" to replace any single character.
-     * Or use a single "*" to replace any number of characters.
-     * It's case-INsensitive!
+    
+        /**
+     * Search in all notes with while-loop.
+     * Warning: it's case-sensitive!
      * @param searchWord The term to be found.
      */
-    public void search(String searchWord)
+    public void searchFor(String searchWord)
     {
-        int termsFound = 0; //counts all findings
-        for(String oneNote : notes) { //for-each-loop
-            if (searchengine.run(oneNote, searchWord)){
-                System.out.println("Found search word '" + 
-                    searchWord + "' at position " +     //print this
-                    notes.indexOf(oneNote) + ", note: " + oneNote);
-                termsFound++; //increase count of found terms
+    	boolean termsFound = false; //nothing found yet
+    	
+        int sizeOfNotes = numberOfNotes(); //size doesn't change
+        for (int i = 0; i < sizeOfNotes; i++){
+        	
+        	// If the term is found print this
+            if(notes.get(i).contains(searchWord)) {
+            	System.out.println("Found search word '" +
+                    searchWord + "' at position " +
+                    i + ", note: " + notes.get(i));
+            	
+            	// Found at least one item, set to true!
+                termsFound = true;
             }
         }
-        if (termsFound == 0) { //only if nothing is found, print message
-            System.out.println("Search term " +searchWord + " not found.");
+        
+        // Only if nothing is found, print message
+        if (!termsFound) {
+        	System.out.println("Search term not found.");
         }
-    }    
-
+    }
+    
     /**
      * Search in all notes with while-loop.
      * Warning: it's case-sensitive!
@@ -127,20 +135,52 @@ public class Notebook
      */
     public void searchWhile(String searchWord)
     {
-        int termsFound = 0; //counts all findings
+    	boolean termsFound = false; //nothing found yet
+    	
         int index = 0; //start with first note
         int sizeOfNotes = numberOfNotes(); //size doesn't change
         while(index != sizeOfNotes){
-            if(notes.get(index).contains(searchWord)) { //if the term is found
-                System.out.println("Found search word '" +
-                    searchWord + "' at position " +     //print this
+        	
+        	// If the term is found print this
+            if(notes.get(index).contains(searchWord)) {
+            	System.out.println("Found search word '" +
+                    searchWord + "' at position " +
                     index + ", note: " + notes.get(index));
-                termsFound++; //increase count of found terms
+            	
+            	// Found at least one item, set to true!
+                termsFound = true;
             }
-            index++; //increase index and restart loop with next
+            
+            // Increase index and move on in the while loop to next item
+            index++;
         }
-        if (termsFound == 0) { //only if nothing is found, print message
-            System.out.println("Search term not found.");
+        
+        // Only if nothing is found, print message
+        if (!termsFound) {
+        	System.out.println("Search term not found.");
         }
     }
+    
+//    /**
+//     * Search in all notes using regular expressions.
+//     * You can use a single "?" to replace any single character.
+//     * Or use a single "*" to replace any number of characters.
+//     * It's case-INsensitive!
+//     * @param searchWord The term to be found.
+//     */
+//    public void search(String searchWord)
+//    {
+//        int termsFound = 0; //counts all findings
+//        for(String oneNote : notes) { //for-each-loop
+//            if (searchengine.run(oneNote, searchWord)){
+//                System.out.println("Found search word '" + 
+//                    searchWord + "' at position " +     //print this
+//                    notes.indexOf(oneNote) + ", note: " + oneNote);
+//                termsFound++; //increase count of found terms
+//            }
+//        }
+//        if (termsFound == 0) { //only if nothing is found, print message
+//            System.out.println("Search term " +searchWord + " not found.");
+//        }
+//    }
 }
