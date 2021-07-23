@@ -15,20 +15,13 @@ public class Prime
     private ArrayList<Integer> primes;
 
     /**
-     * Constructor for objects of class Prime
+     * Constructor for objects of class Prime.
+     *
+     * @param num   Check all primes up to this number.
      */
     public Prime()
     {
         primes = new ArrayList<Integer>();
-    }
-
-    /**
-     * Store a new number into the collection.
-     * @param number The number to be stored.
-     */
-    private void storeNumber(int number)
-    {
-        primes.add(number);
     }
 
     /**
@@ -37,29 +30,27 @@ public class Prime
      * @param  a The number to be checked.
      */
     private void isPrime(int a) {
-        int index = 1; //start check here
-        int divisible = 0; //counts divisions without remainder
-        while (index != a + 1) //run through all possible divisors
-        { 
-            if(a % index == 0){ //divide with modulo
-                divisible++; //increase the count of divisions
-            }
-            index++; // take the next number & loop
-        }
-        if (divisible == 2) //a prime has exactly only 2 divisions
-        {
-            storeNumber(a); //if it's a prime, store it
-        }
+		// Check until the square root of the number
+		// after that the factors flip anyway.
+		for (int n = 2; n <= Math.sqrt(a); n++) {
+            // if this is true, it's not a prime
+			if (a % n == 0) {
+				return;
+			}
+		}
+        // If the loop finishes, nothing is found, it's a prime.
+		primes.add(a);
     }
 
     /**
-     * Generates numbers between 1 and a given final number a.
+     * Generates numbers between 2 and a given final number a.
      * Passes each number to isPrime to be checked.
      * @param nr The final number for the loop.
      */
-    public void inputNumbers(int nr){
+    public void checkNumbers(int nr){
         primes.clear();//clears the list, otherwise they add up!
-        for(int i = 1; i<=nr; i++){ //generate numbers in a loop
+        
+        for(int i = 2; i<=nr; i++){ //generate numbers in a loop
             isPrime(i); //pass the current number to be checked
         }
     }
@@ -68,9 +59,11 @@ public class Prime
      * Lists all prime numbers in collection primes.
      */
     public void listAllPrimes() {
-        for(Integer primeNr : primes) { //for-each-loop
-            System.out.println(primeNr);
-        }
+    	
+        //for(Integer primeNr : primes) { //for-each-loop
+        //	System.out.println(primeNr);
+        //}
+        
         System.out.println("There are " + primes.size() + " primes in this collection");
     }
 }
