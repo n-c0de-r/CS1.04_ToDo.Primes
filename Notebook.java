@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @version 2008.03.30
  * @updated 2020.12.07 by GitYusuf and n-c0de-r
  */
-public class NotebookFinished
+public class Notebook
 {
     // Storage for an arbitrary number of notes.
     private ArrayList<String> notes;
@@ -20,7 +20,7 @@ public class NotebookFinished
      * Perform any initialization that is required for the
      * notebook. Fill the notebook with test strings at start.
      */
-    public NotebookFinished()
+    public Notebook()
     {
         notes = new ArrayList<String>();
         fillNotebook();
@@ -170,16 +170,16 @@ public class NotebookFinished
     public void search(String searchWord)
     {
     	// Replace any of the characters from task 8
-    	if (searchWord.contains("?")) {
-    		searchWord = searchWord.replaceAll("\\?", "\\.");
-    	}
-    	
-    	if (searchWord.contains("*")) {
-    		searchWord = searchWord.replaceAll("\\*", "\\.*");
-    	}
+//    	if (searchWord.contains("?")) {
+//    		searchWord = searchWord.replaceAll("\\?", "\\.");
+//    	}
+//    	
+//    	if (searchWord.contains("*")) {
+//    		searchWord = searchWord.replaceAll("\\*", "\\.*");
+//    	}
     	
     	// Create a RegEx search pattern from the given word
-    	Pattern pattern = Pattern.compile("sch(.*)t", Pattern.CASE_INSENSITIVE);
+    	Pattern pattern = Pattern.compile(searchWord, Pattern.CASE_INSENSITIVE);
     	boolean matchFound = false;
     	
         for(String oneNote : notes) { //for-each-loop
@@ -188,14 +188,14 @@ public class NotebookFinished
         	matchFound = matcher.find();
             
             // If the term is found print this
-            if(matcher.find()) {
+            if(matchFound) {
             	System.out.println("Found search word '" +
                     searchWord + "' at position " +
                     notes.indexOf(oneNote) + ", note: " + oneNote);
             }
         }
     	
-    	if (!matchFound) { //only if nothing is found, print message
+    	if (matchFound) { //only if nothing is found, print message
     		System.out.println("Search term " + searchWord + " not found.");
         }
     }
