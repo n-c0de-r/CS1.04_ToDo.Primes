@@ -108,25 +108,25 @@ public class Notebook
      */
     public void searchFor(String searchWord)
     {
-    	boolean termsFound = false; //nothing found yet
-    	
+        boolean termsFound = false; //nothing found yet
+        
         int sizeOfNotes = numberOfNotes(); //size doesn't change
         for (int i = 0; i < sizeOfNotes; i++){
-        	
-        	// If the term is found print this
+            
+            // If the term is found print this
             if(notes.get(i).contains(searchWord)) {
-            	System.out.println("Found search word '" +
+                System.out.println("Found search word '" +
                     searchWord + "' at position " +
                     i + ", note: " + notes.get(i));
-            	
-            	// Found at least one item, set to true!
+                
+                // Found at least one item, set to true!
                 termsFound = true;
             }
         }
         
         // Only if nothing is found, print message
         if (!termsFound) {
-        	System.out.println("Search term not found.");
+            System.out.println("Search term not found.");
         }
     }
     
@@ -137,19 +137,19 @@ public class Notebook
      */
     public void searchWhile(String searchWord)
     {
-    	boolean termsFound = false; //nothing found yet
-    	
+        boolean termsFound = false; //nothing found yet
+        
         int index = 0; //start with first note
         int sizeOfNotes = numberOfNotes(); //size doesn't change
         while(index != sizeOfNotes){
-        	
-        	// If the term is found print this
+            
+            // If the term is found print this
             if(notes.get(index).contains(searchWord)) {
-            	System.out.println("Found search word '" +
+                System.out.println("Found search word '" +
                     searchWord + "' at position " +
                     index + ", note: " + notes.get(index));
-            	
-            	// Found at least one item, set to true!
+                
+                // Found at least one item, set to true!
                 termsFound = true;
             }
             
@@ -159,7 +159,7 @@ public class Notebook
         
         // Only if nothing is found, print message
         if (!termsFound) {
-        	System.out.println("Search term not found.");
+            System.out.println("Search term not found.");
         }
     }
     
@@ -169,34 +169,34 @@ public class Notebook
      */
     public void search(String searchWord)
     {
-    	// Replace any of the characters from task 8
-//    	if (searchWord.contains("?")) {
-//    		searchWord = searchWord.replaceAll("\\?", "\\.");
-//    	}
-//    	
-//    	if (searchWord.contains("*")) {
-//    		searchWord = searchWord.replaceAll("\\*", "\\.*");
-//    	}
-    	
-    	// Create a RegEx search pattern from the given word
-    	Pattern pattern = Pattern.compile(searchWord, Pattern.CASE_INSENSITIVE);
-    	boolean matchFound = false;
-    	
+        // Replace any of the characters from task 8
+//        if (searchWord.contains("?")) {
+//            searchWord = searchWord.replaceAll("\\?", "\\.");
+//        }
+//        
+//        if (searchWord.contains("*")) {
+//            searchWord = searchWord.replaceAll("\\*", "\\.*");
+//        }
+        
+        // Create a RegEx search pattern from the given word
+        Pattern pattern = Pattern.compile(searchWord, Pattern.CASE_INSENSITIVE);
+        boolean matchFound = false;
+        
         for(String oneNote : notes) { //for-each-loop
-        	// Find matches of the pattern in the given text
-        	Matcher matcher = pattern.matcher(oneNote);
-        	matchFound = matcher.find();
+            // Find matches of the pattern in the given text
+            Matcher matcher = pattern.matcher(oneNote);
+            matchFound = matcher.find();
             
             // If the term is found print this
             if(matchFound) {
-            	System.out.println("Found search word '" +
-                    searchWord + "' at position " +
-                    notes.indexOf(oneNote) + ", note: " + oneNote);
+                System.out.println("\nFound search word '" +
+                    searchWord + "'\nat position " +
+                    notes.indexOf(oneNote) + ", note:\n" + oneNote + "\n");
             }
         }
-    	
-    	if (matchFound) { //only if nothing is found, print message
-    		System.out.println("Search term " + searchWord + " not found.");
+        
+        if (matchFound) { //only if nothing is found, print message
+            System.out.println("Search term " + searchWord + " not found.");
         }
     }
 }
