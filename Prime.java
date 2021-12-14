@@ -30,16 +30,16 @@ public class Prime
      * @param  a The number to be checked.
      */
     private void isPrime(int a) {
-		// Check until the square root of the number
-		// after that the factors flip anyway.
-		for (int n = 2; n <= Math.sqrt(a); n++) {
+        // Check until the square root of the number
+        // after that the factors flip anyway.
+        for (int n = 2; n <= Math.sqrt(a); n++) {
             // if this is true, it's not a prime
-			if (a % n == 0) {
-				return;
-			}
-		}
+            if (a % n == 0) {
+                return;
+            }
+        }
         // If the loop finishes, nothing is found, it's a prime.
-		primes.add(a);
+        primes.add(a);
     }
 
     /**
@@ -53,17 +53,18 @@ public class Prime
         for(int i = 2; i<=nr; i++){ //generate numbers in a loop
             isPrime(i); //pass the current number to be checked
         }
+        
+        System.out.println("\nThere are " + primes.size() + " primes"
+            +"\nbetween the numbers 0 and " + nr + "\n");
     }
 
     /**
      * Lists all prime numbers in collection primes.
      */
     public void listAllPrimes() {
-    	
-        //for(Integer primeNr : primes) { //for-each-loop
-        //	System.out.println(primeNr);
-        //}
         
-        System.out.println("There are " + primes.size() + " primes in this collection");
+        for(Integer primeNr : primes) { //for-each-loop
+           System.out.println(primeNr);
+        }
     }
 }
