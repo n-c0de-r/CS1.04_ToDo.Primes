@@ -30,4 +30,4 @@ To start this project, create a Notebook object and invoke its methods.
  @author GitYusuf, n-c0de-r
  @version 12/07/20
  
- <img src="Notebook&Prime_show.gif">
+ <img src="NotebookPrime_show.gif">
