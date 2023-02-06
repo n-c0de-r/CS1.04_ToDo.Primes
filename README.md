@@ -1,33 +1,17 @@
-# Lab1.4
-Lab 1.4 - A Better Notebook with search engine. 1st semester, 4th lab.
-
-Project: notebook1
-Authors: David J. Barnes and Michael Kolling
-
-This project provides a simple notebook implementation.
-
-This project is part of the Java 5 supplementary material for
-chapter 4 of the book
-
-   Objects First with Java - A Practical Introduction using BlueJ
-   Fourth edition
-   David J. Barnes and Michael Kolling
-   Pearson Education, 2008
-
-To start this project, create a Notebook object and invoke its methods.
-
- Notebook class to maintain an arbitrarily long list of notes.
- Notes are numbered for external reference by a human user.
- In this version, note numbers start at 0.
+ The ToDo-List class to maintain an arbitrarily long list of tasks.
+ Tasks are numbered for external reference by a human user.
+ In this version, task numbers start at 0.
  
- @author David J. Barnes and Michael Kolling.
- @version 2008.03.30
- @updated 2020.12.07 by GitYusuf and n-c0de-r
+ Based on the original by David J. Barnes and Michael Kölling
+ @author n-c0de-r
+ @version 2023.02.06
  
- The class Prime calculates all primes 
- to a certain maximum value.
+ <img src="ToDo_show.gif">
  
- @author GitYusuf, n-c0de-r
- @version 12/07/20
+ The Prime class calculates all primes 
+ to a certain given maximum value.
  
- <img src="NotebookPrime_show.gif">
+ @author n-c0de-r
+ @version 2023.02.06
+ 
+ <img src="Prime_show.gif">
